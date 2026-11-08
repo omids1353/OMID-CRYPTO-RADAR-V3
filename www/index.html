@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>OMID CRYPTO RADAR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#0b1220;--panel:#131d33;--panel2:#1a2744;--line:#25345a;--tx:#e8eefc;--mut:#8a9bc2;--sig:#ffb020;--up:#3ddc97;--dn:#ff6b6b;--ac:#5aa9ff;--r:16px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Vazirmatn,system-ui,Segoe UI,Roboto,sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);min-height:100vh}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:rgba(11,18,32,.92);backdrop-filter:blur(10px);padding:12px 16px;border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:10px}
+.logo{width:36px;height:36px;border-radius:50%;border:2px solid var(--sig);position:relative;flex:none;overflow:hidden}
+.logo:after{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg,transparent 70%,rgba(255,176,32,.7));animation:sw 3s linear infinite}
+.off .logo:after{animation:none;background:none}
+@keyframes sw{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.logo:after{animation:none}}
+h1{font-size:18px;margin:0;flex:1;font-weight:800}
+h1 small{display:block;font-size:11px;color:var(--mut);font-weight:400}
+.sw{width:54px;height:30px;border-radius:15px;background:var(--line);position:relative;transition:.2s;flex:none}
+.sw:after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}
+.sw.on{background:var(--up)}
+.sw.on:after{inset-inline-start:27px}
+.ib{width:38px;height:38px;border-radius:12px;background:var(--panel);font-size:18px}
+.tabs{display:flex;gap:8px;margin-top:12px}
+.tab{flex:1;padding:9px;border-radius:12px;background:var(--panel);color:var(--mut);font-weight:600}
+.tab.a{background:var(--panel2);color:var(--tx);box-shadow:inset 0 -2px 0 var(--sig)}
+#st{font-size:12px;color:var(--mut);padding:10px 16px 0}
+main{padding:10px 12px 90px;display:grid;gap:10px;max-width:720px;margin:auto}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:grid;gap:10px;text-align:start}
+.row{display:flex;align-items:center;gap:10px}
+.ico{width:40px;height:40px;border-radius:50%;background:var(--panel2);object-fit:cover;flex:none;display:grid;place-items:center;font-weight:800}
+.nm{flex:1;min-width:0}
+.nm b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nm span{font-size:11px;color:var(--mut)}
+.chain{background:var(--panel2);padding:2px 8px;border-radius:8px;font-size:11px;color:var(--ac)}
+.spk{background:var(--sig);color:#1b1200;font-weight:800;padding:4px 10px;border-radius:10px;font-size:13px;direction:ltr}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;color:var(--mut)}
+.g b{display:block;color:var(--tx);font-size:13px;direction:ltr;text-align:start}
+.up{color:var(--up)!important}.dn{color:var(--dn)!important}
+svg.sp{width:100%;height:36px}
+.empty{text-align:center;color:var(--mut);padding:40px 20px;line-height:1.9}
+.sheet{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.6);display:none;align-items:flex-end}
+.sheet.o{display:flex}
+.in{background:var(--bg);width:100%;max-width:720px;margin:auto;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));border:1px solid var(--line)}
+.in h2{margin:0 0 12px;font-size:17px}
+iframe{width:100%;height:340px;border:0;border-radius:12px;background:var(--panel)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.btn{padding:10px 14px;border-radius:12px;background:var(--panel2);font-weight:600;font-size:13px}
+.btn.p{background:var(--sig);color:#1b1200}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}
+.kv div{background:var(--panel);padding:8px 10px;border-radius:10px;color:var(--mut)}
+.kv b{display:block;color:var(--tx);direction:ltr;text-align:start}
+.desc{font-size:13px;line-height:1.9;color:var(--mut);margin:10px 0}
+label.f{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+input[type=number],select{background:var(--panel);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px;width:110px;font:inherit;direction:ltr}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{padding:6px 12px;border-radius:20px;background:var(--panel);border:1px solid var(--line);font-size:13px}
+.chip.a{background:var(--ac);color:#04101f;border-color:var(--ac);font-weight:600}
+.toast{position:fixed;bottom:24px;inset-inline:16px;margin:auto;max-width:400px;background:var(--panel2);padding:12px;border-radius:12px;text-align:center;z-index:20;display:none;border:1px solid var(--sig)}
+</style>
+</head>
+<body class="off">
+<header>
+ <div class="top">
+  <div class="logo"></div>
+  <h1><span data-t="title"></span><small id="sub"></small></h1>
+  <button class="ib" id="bSet" aria-label="settings">⚙</button>
+  <button class="sw" id="bPow" aria-label="power"></button>
+ </div>
+ <div class="tabs"><button class="tab a" id="tR"></button><button class="tab" id="tS"></button></div>
+</header>
+<div id="st"></div>
+<main id="list"></main>
+<div class="sheet" id="sh"><div class="in" id="shIn"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const T={
+fa:{title:"OMID CRYPTO RADAR",radar:"رادار",saved:"ذخیره‌شده‌ها",on:"روشن",off:"خاموش",scan:"آخرین اسکن",nothing:"فعلاً ارز جدیدی با جهش حجم پیدا نشد.<br>اپ هر چند ثانیه دوباره اسکن می‌کند.",nosaved:"هنوز ارزی ذخیره نکرده‌اید. روی ⭐ در جزئیات ارز بزنید.",offmsg:"رادار خاموش است. کلید بالا را روشن کنید.",
+settings:"تنظیمات",lang:"زبان",nets:"شبکه‌ها (خالی = همه)",thr:"حداقل جهش حجم (برابر)",minv:"حداقل حجم ۱ ساعته ($)",minl:"حداقل نقدینگی ($)",age:"حداکثر سن ارز (روز)",int:"فاصله اسکن (ثانیه)",notif:"نوتیفیکیشن",sound:"آلارم صوتی",vib:"ویبره",close:"بستن",
+price:"قیمت",mcap:"مارکت کپ",fdv:"FDV",liq:"نقدینگی",v5:"حجم ۵ دقیقه",v1:"حجم ۱ ساعت",v24:"حجم ۲۴ ساعت",spike:"جهش حجم",age_:"سن",buys:"خرید/فروش ۱ ساعت",save:"⭐ ذخیره",unsave:"★ حذف",share:"اشتراک‌گذاری",copy:"کپی آدرس",open:"باز کردن در DexScreener",buy:"🟢 خرید",sell:"🔴 فروش",pasteaddr:"آدرس توکن کپی شد. در صفحه باز شده، آن را در کادر جستجوی توکن paste کنید.",swapnote:"خرید و فروش در صرافی غیرمتمرکز و کیف پول خودتان انجام می‌شود. قبل از تأیید، آدرس توکن، نقدینگی و مبلغ را همان‌جا دوباره بررسی کنید.",copied:"کپی شد",alert:"🚨 جهش حجم",nodesc:"توضیحی از پروژه ثبت نشده است. شبکه، سن و نقدینگی را قبل از هر تصمیمی بررسی کنید.",warn:"هشدار: ارزهای جدید ریسک بالایی دارند (اسکم/رج‌پول). این اپ توصیه مالی نیست.",min:"دقیقه",h:"ساعت",d:"روز",err:"خطا در دریافت اطلاعات",perm:"برای نوتیفیکیشن اجازه بدهید",chart:"چارت زنده"},
+en:{title:"OMID CRYPTO RADAR",radar:"Radar",saved:"Saved",on:"ON",off:"OFF",scan:"Last scan",nothing:"No new coin with a volume spike right now.<br>The app rescans automatically.",nosaved:"Nothing saved yet. Tap ⭐ in a coin's details.",offmsg:"Radar is off. Turn on the switch above.",
+settings:"Settings",lang:"Language",nets:"Networks (empty = all)",thr:"Min volume spike (x)",minv:"Min 1h volume ($)",minl:"Min liquidity ($)",age:"Max coin age (days)",int:"Scan interval (sec)",notif:"Notifications",sound:"Alarm sound",vib:"Vibration",close:"Close",
+price:"Price",mcap:"Market cap",fdv:"FDV",liq:"Liquidity",v5:"5m volume",v1:"1h volume",v24:"24h volume",spike:"Volume spike",age_:"Age",buys:"1h buys/sells",save:"⭐ Save",unsave:"★ Remove",share:"Share",copy:"Copy address",open:"Open on DexScreener",buy:"🟢 Buy",sell:"🔴 Sell",pasteaddr:"Token address copied. Paste it into the token search box on the page that opens.",swapnote:"Buying and selling happens on a decentralized exchange with your own wallet. Re-check the token address, liquidity and amount there before confirming.",copied:"Copied",alert:"🚨 Volume spike",nodesc:"No project description listed. Check network, age and liquidity before any decision.",warn:"Warning: new coins are very risky (scams/rug pulls). Not financial advice.",min:"min",h:"h",d:"d",err:"Failed to fetch data",perm:"Please allow notifications",chart:"Live chart"}};
+const CHAINS=["solana","ethereum","bsc","base","arbitrum","polygon","avalanche","sui","ton","tron","optimism","pulsechain"];
+const API="https://api.dexscreener.com";
+const $=s=>document.querySelector(s);
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+let S=Object.assign({lang:"fa",chains:[],thr:5,minv:3000,minl:5000,age:3,int:60,notif:true,sound:true,vib:true,on:false},load("cr_set",{}));
+let saved=load("cr_saved",{}),alerted=load("cr_alerted",{}),found=[],tab="radar",timer=null,last=null,reg=null,busy=false;
+const t=k=>T[S.lang][k];
+const fmt=n=>{n=+n;if(!isFinite(n))return"–";const a=Math.abs(n);return a>=1e9?(n/1e9).toFixed(2)+"B":a>=1e6?(n/1e6).toFixed(2)+"M":a>=1e3?(n/1e3).toFixed(1)+"K":n.toFixed(a<10?2:0)};
+const px=p=>{p=+p;return !p?"–":p>=1?p.toFixed(3):p>=0.01?p.toFixed(5):p.toPrecision(3)};
+const ageTxt=ms=>{const m=ms/6e4;return m<60?Math.round(m)+" "+t("min"):m<1440?(m/60).toFixed(1)+" "+t("h"):(m/1440).toFixed(1)+" "+t("d")};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const key=c=>c.chain+":"+c.addr;
+
+function applyLang(){document.documentElement.lang=S.lang;document.documentElement.dir=S.lang=="fa"?"rtl":"ltr";
+ document.querySelector("[data-t=title]").textContent=t("title");$("#tR").textContent=t("radar");$("#tS").textContent=t("saved");render()}
+function setPower(){const on=S.on;$("#bPow").classList.toggle("on",on);document.body.classList.toggle("off",!on);save("cr_set",S);
+ clearInterval(timer);if(on){scan();timer=setInterval(scan,Math.max(20,S.int)*1000)}else{$("#st").textContent="";render()}}
+
+async function jget(u){const r=await fetch(u);if(!r.ok)throw new Error(r.status);return r.json()}
+async function scan(){
+ if(busy)return;busy=true;
+ try{
+  const [a,b]=await Promise.allSettled([jget(API+"/token-profiles/latest/v1"),jget(API+"/token-boosts/latest/v1")]);
+  const cand=new Map();
+  for(const r of [a,b])if(r.status=="fulfilled"&&Array.isArray(r.value))for(const x of r.value){
+   if(S.chains.length&&!S.chains.includes(x.chainId))continue;
+   const k=x.chainId+":"+x.tokenAddress;const o=cand.get(k)||{};
+   cand.set(k,{chain:x.chainId,addr:x.tokenAddress,desc:x.description||o.desc,icon:x.icon||o.icon,links:x.links||o.links})}
+  const by={};for(const c of cand.values())(by[c.chain]=by[c.chain]||[]).push(c);
+  const out=[];
+  await Promise.all(Object.entries(by).map(async([ch,arr])=>{
+   for(let i=0;i<arr.length;i+=30){
+    const part=arr.slice(i,i+30);
+    try{const pairs=await jget(`${API}/tokens/v1/${ch}/${part.map(p=>p.addr).join(",")}`);
+     for(const c of part){
+      const ps=pairs.filter(p=>p.baseToken&&p.baseToken.address.toLowerCase()==c.addr.toLowerCase()).sort((x,y)=>(y.liquidity?.usd||0)-(x.liquidity?.usd||0));
+      const p=ps[0];if(!p)continue;
+      const v=p.volume||{},h1=v.h1||0,h24=v.h24||0,base=Math.max((h24-h1)/23,1);
+      out.push({...c,sym:p.baseToken.symbol,name:p.baseToken.name,pair:p.pairAddress,url:p.url,price:+p.priceUsd,pc:p.priceChange||{},v5:v.m5||0,v1:h1,v24:h24,
+       liq:p.liquidity?.usd||0,mc:p.marketCap||0,fdv:p.fdv||0,born:p.pairCreatedAt,spike:h1/base,tx:p.txns?.h1||{},icon:p.info?.imageUrl||c.icon,
+       sites:(p.info?.websites||[]).map(w=>w.url),socials:p.info?.socials||[]})}
+    }catch(e){}}}));
+  const days=S.age*864e5,now=Date.now();
+  found=out.filter(c=>c.spike>=S.thr&&c.v1>=S.minv&&c.liq>=S.minl&&(!c.born||now-c.born<=days)).sort((x,y)=>y.spike-x.spike);
+  last=new Date();$("#st").textContent=t("scan")+": "+last.toLocaleTimeString(S.lang=="fa"?"fa-IR":"en-US");
+  for(const c of found){const k=key(c);if(!alerted[k]||now-alerted[k]>18e5){alerted[k]=now;notify(c)}}
+  save("cr_alerted",alerted);
+ }catch(e){$("#st").textContent=t("err")}
+ busy=false;render()}
+
+let actx;function beep(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.type="square";
+ let tm=actx.currentTime;[880,660,880,660].forEach((f,i)=>{o.frequency.setValueAtTime(f,tm+i*.18)});g.gain.setValueAtTime(.15,tm);g.gain.exponentialRampToValueAtTime(.001,tm+.8);o.start();o.stop(tm+.8)}catch{}}
+function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";setTimeout(()=>e.style.display="none",2500)}
+const NLN=()=>window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins.LocalNotifications;
+async function askNotif(){
+ const L=NLN();
+ if(L){try{const r=await L.requestPermissions();await L.createChannel({id:"radar",name:"Radar alerts",importance:5,vibration:true,visibility:1});return r.display=="granted"}catch{return false}}
+ if("Notification"in window){if(Notification.permission=="default")await Notification.requestPermission();return Notification.permission=="granted"}
+ return false}
+function notify(c){
+ const msg=`${c.sym} · ${c.chain} · ${t("spike")} ${c.spike>99?">99":c.spike.toFixed(1)}x · ${t("mcap")} $${fmt(c.mc||c.fdv)}`;
+ if(S.sound)beep();if(S.vib&&navigator.vibrate)navigator.vibrate([200,100,200,100,400]);toast(t("alert")+" "+msg);
+ if(S.notif&&NLN()){
+  NLN().schedule({notifications:[{id:Math.floor(Math.random()*2000000000)+1,title:t("alert"),body:msg,channelId:"radar",smallIcon:"ic_stat_icon"}]}).catch(()=>{})}
+ else if(S.notif&&"Notification"in window&&Notification.permission=="granted"){
+  const o={body:msg,icon:c.icon||"icon-192.png",tag:key(c),data:{url:c.url}};
+  if(reg)reg.showNotification(t("alert"),o);else new Notification(t("alert"),o)}}
+
+function spark(c){const p=c.price,ch=c.pc;if(!p)return"";
+ const pts=[24,6,1,0.083].map((h,i)=>{const k=["h24","h6","h1","m5"][i];return p/(1+(ch[k]||0)/100)}).concat([p]);
+ const mn=Math.min(...pts),mx=Math.max(...pts),r=mx-mn||1;
+ const d=pts.map((v,i)=>`${i*25},${34-((v-mn)/r)*30}`).join(" ");
+ const up=pts[4]>=pts[0];return`<svg class="sp" viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="${d}" fill="none" stroke="${up?"var(--up)":"var(--dn)"}" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`}
+const chg=v=>v==null?"–":`<span class="${v>=0?"up":"dn"}">${v>=0?"+":""}${v}%</span>`;
+function cardHtml(c,i){const sp=c.spike>99?">99":c.spike.toFixed(1);
+ return`<button class="card" data-i="${i}"><div class="row">${c.icon?`<img class="ico" src="${esc(c.icon)}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div class="ico">${esc((c.sym||"?")[0])}</div>`}
+ <div class="nm"><b>${esc(c.sym)} ${saved[key(c)]?"⭐":""}</b><span>${esc(c.name)}</span></div><span class="chain">${esc(c.chain)}</span><span class="spk">${sp}x</span></div>
+ ${spark(c)}<div class="g"><div>${t("price")}<b>$${px(c.price)}</b></div><div>${t("mcap")}<b>$${fmt(c.mc||c.fdv)}</b></div><div>${t("v1")}<b>$${fmt(c.v1)}</b></div><div>1${t("h")}<b>${chg(c.pc.h1)}</b></div></div></button>`}
+function render(){
+ const L=$("#list");const arr=tab=="radar"?found:Object.values(saved);
+ if(tab=="radar"&&!S.on){L.innerHTML=`<div class="empty">${t("offmsg")}</div>`;return}
+ if(!arr.length){L.innerHTML=`<div class="empty">${tab=="radar"?t("nothing"):t("nosaved")}</div>`;return}
+ L.innerHTML=arr.map(cardHtml).join("");
+ L.querySelectorAll(".card").forEach(b=>b.onclick=()=>detail(arr[b.dataset.i]))}
+
+function open_(html){$("#shIn").innerHTML=html;$("#sh").classList.add("o")}
+function close_(){$("#sh").classList.remove("o");$("#shIn").innerHTML=""}
+$("#sh").onclick=e=>{if(e.target.id=="sh")close_()};
+function swapUrl(c,side){
+ const a=encodeURIComponent(c.addr),b=side=="buy",io=b?"outputCurrency":"inputCurrency";
+ const uni=ch=>`https://app.uniswap.org/swap?chain=${ch}&${io}=${a}`;
+ switch(c.chain){
+  case"solana":return b?`https://jup.ag/swap/SOL-${a}`:`https://jup.ag/swap/${a}-SOL`;
+  case"ethereum":return uni("mainnet");
+  case"base":case"arbitrum":case"optimism":case"polygon":case"avalanche":return uni(c.chain);
+  case"bsc":return`https://pancakeswap.finance/swap?chain=bsc&${io}=${a}`;
+  case"pulsechain":return`https://app.pulsex.com/swap?${io}=${a}`;
+  case"ton":return b?`https://app.ston.fi/swap?ft=TON&tt=${a}`:`https://app.ston.fi/swap?ft=${a}&tt=TON`;
+  case"sui":return"https://app.cetus.zone/";
+  case"tron":return"https://sun.io/";
+  default:return c.url}}
+const needCopy=c=>c.chain=="sui"||c.chain=="tron";
+function detail(c){
+ const k=key(c),isS=!!saved[k],sp=c.spike>99?">99":c.spike.toFixed(1);
+ const links=[...c.sites.map(u=>["🌐",u]),...c.socials.map(s=>["🔗",s.url])].slice(0,6);
+ open_(`<div class="row"><h2 style="flex:1">${esc(c.sym)} — ${esc(c.name)}</h2><span class="chain">${esc(c.chain)}</span><button class="ib" id="x">✕</button></div>
+ <iframe src="https://dexscreener.com/${esc(c.chain)}/${esc(c.pair)}?embed=1&theme=dark&trades=0&info=0" title="${t("chart")}" loading="lazy"></iframe>
+ <div class="btns"><button class="btn p" id="bs">${isS?t("unsave"):t("save")}</button><button class="btn" id="bsh">${t("share")}</button><button class="btn" id="bc">${t("copy")}</button></div>
+ <div class="btns"><a class="btn" style="text-decoration:none;color:var(--up);font-weight:800" target="_blank" rel="noopener" href="${esc(swapUrl(c,"buy"))}"${needCopy(c)?' data-copy="1"':""}>${t("buy")}</a><a class="btn" style="text-decoration:none;color:var(--dn);font-weight:800" target="_blank" rel="noopener" href="${esc(swapUrl(c,"sell"))}"${needCopy(c)?' data-copy="1"':""}>${t("sell")}</a></div>
+ <p class="desc">${t("swapnote")}</p>
+ <div class="kv"><div>${t("spike")}<b class="up">${sp}x</b></div><div>${t("age_")}<b>${c.born?ageTxt(Date.now()-c.born):"–"}</b></div>
+ <div>${t("price")}<b>$${px(c.price)}</b></div><div>${t("mcap")}<b>$${fmt(c.mc)}</b></div><div>${t("fdv")}<b>$${fmt(c.fdv)}</b></div><div>${t("liq")}<b>$${fmt(c.liq)}</b></div>
+ <div>${t("v5")}<b>$${fmt(c.v5)}</b></div><div>${t("v1")}<b>$${fmt(c.v1)}</b></div><div>${t("v24")}<b>$${fmt(c.v24)}</b></div><div>${t("buys")}<b>${c.tx.buys??"–"} / ${c.tx.sells??"–"}</b></div>
+ <div>5m<b>${chg(c.pc.m5)}</b></div><div>1${t("h")}<b>${chg(c.pc.h1)}</b></div><div>6${t("h")}<b>${chg(c.pc.h6)}</b></div><div>24${t("h")}<b>${chg(c.pc.h24)}</b></div></div>
+ <p class="desc">${c.desc?esc(c.desc):t("nodesc")}</p>
+ <div class="btns">${links.map(l=>`<a class="btn" style="text-decoration:none;color:inherit" target="_blank" rel="noopener" href="${esc(l[1])}">${l[0]} ${esc(new URL(l[1],location.href).hostname.replace("www.",""))}</a>`).join("")}<a class="btn" style="text-decoration:none;color:inherit" target="_blank" rel="noopener" href="${esc(c.url)}">${t("open")}</a></div>
+ <p class="desc" style="color:var(--sig)">${t("warn")}</p>`);
+ $("#x").onclick=close_;
+ document.querySelectorAll("[data-copy]").forEach(a=>a.addEventListener("click",()=>{try{navigator.clipboard.writeText(c.addr)}catch{}toast(t("pasteaddr"))}));
+ $("#bs").onclick=()=>{isS?delete saved[k]:saved[k]=c;save("cr_saved",saved);close_();render()};
+ $("#bsh").onclick=async()=>{const txt=`${c.sym} (${c.chain}) — ${t("spike")} ${sp}x · ${t("mcap")} $${fmt(c.mc||c.fdv)} · ${t("v1")} $${fmt(c.v1)}\n${c.url}`;
+  if(navigator.share)try{await navigator.share({title:c.sym,text:txt,url:c.url})}catch{}else{await navigator.clipboard?.writeText(txt);toast(t("copied"))}};
+ $("#bc").onclick=async()=>{try{await navigator.clipboard.writeText(c.addr);toast(t("copied"))}catch{}}}
+
+function settings(){
+ const num=(id,k)=>`<label class="f">${t(id)}<input type="number" min="0" id="n_${k}" value="${S[k]}"></label>`;
+ const tg=(id,k)=>`<label class="f">${t(id)}<button class="sw ${S[k]?"on":""}" data-k="${k}" type="button"></button></label>`;
+ open_(`<div class="row"><h2 style="flex:1">${t("settings")}</h2><button class="ib" id="x">✕</button></div>
+ <label class="f">${t("lang")}<select id="lg"><option value="fa" ${S.lang=="fa"?"selected":""}>فارسی</option><option value="en" ${S.lang=="en"?"selected":""}>English</option></select></label>
+ <div style="padding-top:10px;font-size:14px">${t("nets")}</div><div class="chips">${CHAINS.map(c=>`<button class="chip ${S.chains.includes(c)?"a":""}" data-c="${c}">${c}</button>`).join("")}</div>
+ ${num("thr","thr")}${num("minv","minv")}${num("minl","minl")}${num("age","age")}${num("int","int")}
+ ${tg("notif","notif")}${tg("sound","sound")}${tg("vib","vib")}
+ <div class="btns"><button class="btn p" id="ok">${t("close")}</button></div>`);
+ $("#x").onclick=$("#ok").onclick=()=>{["thr","minv","minl","age","int"].forEach(k=>S[k]=Math.max(0,+$("#n_"+k).value||0));save("cr_set",S);close_();setPower()};
+ $("#lg").onchange=e=>{S.lang=e.target.value;save("cr_set",S);applyLang();settings()};
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const c=b.dataset.c;S.chains=S.chains.includes(c)?S.chains.filter(x=>x!=c):[...S.chains,c];b.classList.toggle("a")});
+ document.querySelectorAll("[data-k]").forEach(b=>b.onclick=async()=>{const k=b.dataset.k;S[k]=!S[k];b.classList.toggle("on",S[k]);
+  if(k=="notif"&&S[k]){const ok=await askNotif();if(!ok)toast(t("perm"))}})}
+
+$("#bPow").onclick=async()=>{S.on=!S.on;
+ if(S.on&&S.notif)await askNotif();
+ if(S.on&&S.sound){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();actx.resume()}catch{}}
+ setPower()};
+$("#bSet").onclick=settings;
+$("#tR").onclick=()=>{tab="radar";$("#tR").classList.add("a");$("#tS").classList.remove("a");render()};
+$("#tS").onclick=()=>{tab="saved";$("#tS").classList.add("a");$("#tR").classList.remove("a");render()};
+if("serviceWorker"in navigator&&!window.Capacitor)navigator.serviceWorker.register("sw.js").then(r=>reg=r).catch(()=>{});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.on)scan()});
+applyLang();setPower();
+</script>
+</body>
+</html>
