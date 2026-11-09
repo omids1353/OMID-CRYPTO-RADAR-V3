@@ -1,0 +1,30 @@
+{
+  "appId": "com.omid.cryptoradar",
+  "appName": "OMID CRYPTO RADAR",
+  "webDir": "www",
+  "server": { "androidScheme": "https" },
+  "plugins": {
+    "CapacitorHttp": { "enabled": true },
+    "LocalNotifications": { "smallIcon": "ic_stat_icon", "iconColor": "#FFB020" }
+  }
+}
+
+{
+  "name": "omid-crypto-radar",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/local-notifications": "^6.1.0",
+    "@capacitor/share": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}
+
+node_modules/
+android/
+ios/
+.DS_Store
